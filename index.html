@@ -1,0 +1,1031 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Limb Lab | Biomedical Prosthetics</title>
+  <meta name="description" content="Limb Lab conçoit des solutions prosthétiques biomédicales: éducation, R&D, compétitions et partenariat e-NABLE." />
+
+  <style>
+    :root{
+      --blue:#315D97;
+      --blue-900:#0B316A;
+      --green:#6DA051;
+
+      --card: rgba(255,255,255,.82);
+      --text: rgba(11,18,32,.92);
+      --muted: rgba(11,18,32,.62);
+      --stroke: rgba(11,18,32,.10);
+      --shadow: 0 18px 50px rgba(11,18,32,.10);
+      --radius: 18px;
+      --max: 1120px;
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--text);
+      background:
+        radial-gradient(1100px 600px at 18% -10%, rgba(49,93,151,.18), transparent 55%),
+        radial-gradient(900px 520px at 95% 10%, rgba(109,160,81,.16), transparent 55%),
+        linear-gradient(180deg, #f7fbff 0%, #ffffff 55%, #f6fff8 100%);
+      overflow-x:hidden;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    img{ max-width:100%; display:block; }
+    .wrap{ width:min(var(--max), calc(100% - 40px)); margin:0 auto; }
+
+    /* Navbar */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(247,251,255,.92), rgba(247,251,255,.65));
+      border-bottom:1px solid var(--stroke);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+      gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      min-width: 190px;
+    }
+    .brand img{
+      width:40px; height:40px; border-radius:12px;
+      background:rgba(255,255,255,.9);
+      padding:6px;
+      border:1px solid var(--stroke);
+      box-shadow: 0 10px 24px rgba(11,18,32,.08);
+    }
+    .brand strong{ font-weight:800; letter-spacing:.2px; }
+    .brand span{ color:var(--muted); font-size:12px; display:block; margin-top:1px; }
+
+    .links{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end; }
+    .links a{
+      font-size:14px; color:var(--muted);
+      padding:8px 10px; border-radius:12px;
+      transition: background .2s, color .2s, transform .2s;
+    }
+    .links a:hover{ color:var(--text); background:rgba(11,18,32,.05); transform: translateY(-1px); }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:10px 14px;
+      border:1px solid var(--stroke);
+      border-radius:14px;
+      background: rgba(255,255,255,.75);
+      color:var(--text);
+      font-weight:650;
+      transition: transform .2s, background .2s, border-color .2s;
+      cursor:pointer;
+      user-select:none;
+      box-shadow: 0 10px 22px rgba(11,18,32,.06);
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.92); border-color: rgba(11,18,32,.14); }
+    .btn.primary{
+      border-color: rgba(49,93,151,.40);
+      background: linear-gradient(135deg, rgba(49,93,151,.95), rgba(11,49,106,.92));
+      color: white;
+      box-shadow: 0 14px 30px rgba(49,93,151,.22);
+    }
+    .btn.primary:hover{ transform: translateY(-1px) scale(1.01); }
+
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px; color:rgba(11,18,32,.62);
+      border:1px solid rgba(11,18,32,.10);
+      background: rgba(255,255,255,.75);
+      padding:8px 10px; border-radius:999px;
+      box-shadow: 0 10px 20px rgba(11,18,32,.05);
+    }
+    .dot{ width:9px; height:9px; border-radius:99px; background: var(--green); box-shadow: 0 0 0 4px rgba(109,160,81,.16); }
+
+    /* Hero */
+    header{
+      padding:44px 0 18px;
+      position:relative;
+    }
+    .hero{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:24px;
+      align-items:stretch;
+    }
+    @media (max-width: 920px){
+      .hero{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      border:1px solid var(--stroke);
+      border-radius: var(--radius);
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-left{
+      padding:28px;
+      position:relative;
+      overflow:hidden;
+    }
+    .kicker{
+      display:flex; gap:10px; align-items:center;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 14px;
+      flex-wrap:wrap;
+    }
+    h1{
+      margin:0;
+      font-size: clamp(30px, 4vw, 46px);
+      letter-spacing: -0.6px;
+      line-height:1.08;
+    }
+    .accent{
+      background: linear-gradient(90deg, var(--blue), var(--green));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .lead{
+      margin:14px 0 18px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 60ch;
+    }
+    .actions{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+
+    .stats{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+      margin-top:18px;
+    }
+    @media (max-width: 520px){ .stats{ grid-template-columns:1fr; } }
+    .stat{
+      padding:14px;
+      border-radius: 16px;
+      border:1px solid rgba(11,18,32,.10);
+      background: rgba(255,255,255,.70);
+    }
+    .stat b{ font-size:18px; display:block; }
+    .stat span{ color:var(--muted); font-size:12px; }
+
+    .glow{
+      position:absolute; inset:-40%;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(49,93,151,.22), transparent 50%),
+        radial-gradient(circle at 70% 55%, rgba(109,160,81,.18), transparent 55%);
+      filter: blur(26px);
+      animation: float 10s ease-in-out infinite;
+      pointer-events:none;
+    }
+    @keyframes float{
+      0%,100%{ transform: translate3d(0,0,0) scale(1); }
+      50%{ transform: translate3d(20px,-10px,0) scale(1.03); }
+    }
+
+    .hero-right{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .hero-media{
+      border-radius: 16px;
+      overflow:hidden;
+      border:1px solid rgba(11,18,32,.10);
+      background: rgba(255,255,255,.70);
+      position:relative;
+      min-height: 260px;
+    }
+    .hero-media img{
+      width:100%; height:100%; object-fit:cover;
+      opacity:.96;
+      transform: scale(1.02);
+    }
+    .badge{
+      position:absolute; left:14px; bottom:14px;
+      display:flex; gap:10px; align-items:center;
+      padding:10px 12px;
+      border-radius: 999px;
+      border:1px solid rgba(11,18,32,.10);
+      background: rgba(255,255,255,.75);
+      backdrop-filter: blur(8px);
+      font-size: 12px;
+      color: var(--muted);
+      box-shadow: 0 12px 26px rgba(11,18,32,.08);
+    }
+    .badge strong{ color:var(--text); font-weight:750; }
+
+    /* Sections */
+    section{ padding:28px 0; }
+    .section-title{
+      display:flex; justify-content:space-between; align-items:flex-end; gap:12px;
+      margin-bottom:12px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size: 20px;
+      letter-spacing: -0.2px;
+    }
+    .section-title p{
+      margin:0;
+      color: var(--muted);
+      font-size: 13px;
+      max-width: 75ch;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    @media (max-width: 920px){ .grid-3{ grid-template-columns:1fr; } }
+
+    .feature{
+      padding:18px;
+      border-radius: var(--radius);
+      border:1px solid rgba(11,18,32,.10);
+      background: rgba(255,255,255,.70);
+      transition: transform .18s, border-color .18s, background .18s;
+      position:relative;
+      overflow:hidden;
+      box-shadow: 0 12px 26px rgba(11,18,32,.06);
+    }
+    .feature:hover{
+      transform: translateY(-2px);
+      border-color: rgba(11,18,32,.14);
+      background: rgba(255,255,255,.88);
+    }
+    .icon{
+      width:40px; height:40px; border-radius:14px;
+      display:grid; place-items:center;
+      border:1px solid rgba(11,18,32,.10);
+      background: linear-gradient(135deg, rgba(49,93,151,.15), rgba(109,160,81,.12));
+      margin-bottom:10px;
+    }
+    .feature h3{ margin:6px 0; font-size:16px; }
+    .feature p{ margin:0; color:var(--muted); line-height:1.6; font-size:14px; }
+
+    /* Vision card (short mission text under "Ce quon fait") */
+    .vision{
+      padding:18px;
+      border-radius: var(--radius);
+      border:1px solid rgba(49,93,151,.18);
+      background: linear-gradient(135deg, rgba(49,93,151,.10), rgba(109,160,81,.10));
+      box-shadow: 0 18px 50px rgba(11,18,32,.08);
+    }
+    .vision b{ font-size:16px; }
+    .vision p{ margin:8px 0 0; color:var(--muted); line-height:1.6; }
+
+    /* Gallery slider */
+    .slider{
+      position:relative;
+      overflow:hidden;
+      border-radius: var(--radius);
+      border:1px solid rgba(11,18,32,.10);
+      background: rgba(255,255,255,.70);
+      box-shadow: 0 18px 50px rgba(11,18,32,.10);
+    }
+    .track{
+      display:flex;
+      transition: transform .55s cubic-bezier(.2,.8,.2,1);
+      will-change: transform;
+    }
+    .slide{
+      min-width:100%;
+      height: 320px;
+      position:relative;
+    }
+    .slide img{
+      width:100%; height:100%;
+      object-fit:cover;
+      opacity:.96;
+    }
+    .slide::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(to top, rgba(11,18,32,.52), transparent 60%);
+    }
+    .caption{
+      position:absolute; left:16px; bottom:14px; right:16px;
+      display:flex; justify-content:space-between; align-items:flex-end; gap:12px;
+      z-index:2;
+      color: white;
+    }
+    .caption b{ font-size:14px; }
+    .caption span{ color: rgba(255,255,255,.78); font-size:12px; }
+
+    .slider-controls{
+      display:flex; gap:10px; align-items:center;
+      margin-top:10px;
+      flex-wrap:wrap;
+    }
+    .dots{ display:flex; gap:8px; align-items:center; }
+    .s-dot{
+      width:9px; height:9px; border-radius:99px;
+      background: rgba(11,18,32,.22);
+      border:1px solid rgba(11,18,32,.10);
+      cursor:pointer;
+    }
+    .s-dot.active{ background: var(--green); border-color: rgba(109,160,81,.45); }
+
+    /* Members */
+    .toolbar{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+      margin: 8px 0 14px;
+    }
+    .input{
+      flex:1;
+      min-width: 220px;
+      padding:10px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(11,18,32,.10);
+      background: rgba(255,255,255,.80);
+      color: var(--text);
+      outline:none;
+      box-shadow: 0 10px 22px rgba(11,18,32,.06);
+    }
+    .input::placeholder{ color: rgba(11,18,32,.40); }
+    .chips{ display:flex; gap:8px; flex-wrap:wrap; }
+    .chip{
+      padding:8px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(11,18,32,.10);
+      background: rgba(255,255,255,.78);
+      color: var(--muted);
+      font-size: 12px;
+      cursor:pointer;
+      transition: background .18s, transform .18s, color .18s, border-color .18s;
+      box-shadow: 0 10px 20px rgba(11,18,32,.05);
+    }
+    .chip.active{
+      color: var(--text);
+      border-color: rgba(49,93,151,.35);
+      background: rgba(49,93,151,.12);
+    }
+
+    .members{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:12px;
+    }
+    @media (max-width: 980px){ .members{ grid-template-columns: repeat(2, 1fr);} }
+    @media (max-width: 520px){ .members{ grid-template-columns: 1fr;} }
+
+    .member{
+      padding:12px;
+      border-radius: var(--radius);
+      border:1px solid rgba(11,18,32,.10);
+      background: rgba(255,255,255,.78);
+      cursor:pointer;
+      transition: transform .18s, background .18s, border-color .18s;
+      box-shadow: 0 12px 26px rgba(11,18,32,.06);
+    }
+    .member:hover{
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.92);
+      border-color: rgba(11,18,32,.14);
+    }
+    .avatar{
+      border-radius: 14px;
+      overflow:hidden;
+      border:1px solid rgba(11,18,32,.10);
+      background: rgba(11,18,32,.04);
+      height: 130px;
+      margin-bottom: 10px;
+    }
+    .avatar img{ width:100%; height:100%; object-fit:cover; }
+    .member b{ display:block; }
+    .member small{ color: var(--muted); }
+
+    .subhead{
+      margin: 10px 0 10px;
+      font-size: 16px;
+      letter-spacing: -0.2px;
+    }
+
+    /* Partnership banner */
+    .banner{
+      padding:18px;
+      border-radius: var(--radius);
+      border:1px solid rgba(109,160,81,.22);
+      background: linear-gradient(135deg, rgba(109,160,81,.14), rgba(49,93,151,.12));
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      flex-wrap:wrap;
+      box-shadow: 0 18px 50px rgba(11,18,32,.08);
+    }
+    .banner p{ margin:0; color: var(--muted); max-width: 80ch; }
+
+    footer{
+      padding:26px 0 34px;
+      color: rgba(11,18,32,.60);
+      border-top:1px solid rgba(11,18,32,.10);
+      margin-top: 10px;
+      background: rgba(255,255,255,.55);
+    }
+    footer .foot{
+      display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
+      align-items:center;
+    }
+
+    /* Reveal animation */
+    .reveal{
+      opacity:0;
+      transform: translateY(10px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.on{
+      opacity:1;
+      transform: translateY(0);
+    }
+
+    /* Modal */
+    dialog{
+      border:none;
+      padding:0;
+      width:min(720px, calc(100% - 24px));
+      border-radius: 20px;
+      background: rgba(255,255,255,.96);
+      color: var(--text);
+      box-shadow: 0 40px 120px rgba(11,18,32,.22);
+      border:1px solid rgba(11,18,32,.12);
+    }
+    dialog::backdrop{
+      background: rgba(11,18,32,.35);
+      backdrop-filter: blur(6px);
+    }
+    .modal{
+      display:grid;
+      grid-template-columns: 220px 1fr;
+      gap:14px;
+      padding:14px;
+    }
+
+    @media (max-width: 680px){ .modal{ grid-template-columns:1fr; } }
+    .modal .m-img{
+      border-radius: 16px;
+      overflow:hidden;
+      border:1px solid rgba(11,18,32,.10);
+      height: 220px;
+      background: rgba(11,18,32,.04);
+    }
+    .modal .m-img img{ width:100%; height:100%; object-fit:cover; }
+    .modal p{ margin:0; color: var(--muted); line-height:1.6; }
+    .modal .m-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
+    .x{
+      border-radius: 12px;
+      border:1px solid rgba(11,18,32,.10);
+      background: rgba(255,255,255,.86);
+      color: var(--text);
+      padding:8px 10px;
+      cursor:pointer;
+      box-shadow: 0 10px 18px rgba(11,18,32,.06);
+    }
+
+    .big-join{
+        padding: 38px;
+        width: 100%;
+        min-height: 120px;
+        align-items: center;
+    }
+
+    .big-join b{ font-size: 42px !important; }
+    .big-join p{ font-size: 15px; }
+    .big-join .btn{padding: 12px 18px; font-size: 15px; }
+    
+
+
+    .partner-row{
+        display:flex;
+        align-items:center;
+        gap:14px;
+        padding:12px;
+        border-radius: 16px;
+        border: 1px solid rgba(11,18,32,.10);
+        background: rgba(255,255,255,.70);
+    }
+
+    .partner-logo{
+        width:56px;
+        height:56px;
+        object-fit: contain;
+        border-radius: 12px;
+        border: 1px solid rgba(11,18,32,.10);
+        background: rgba(255,255,255,.90);
+        padding:8px;
+    }
+
+    .partner-text{ line-height:1.2; }
+
+    .partner-name{
+        font-weight: 800;
+        color: #C9A227; /* or */
+        letter-spacing: .2px;
+    }
+
+    .partner-note{
+        margin-top: 4px;
+        font-size: 11px;
+        font-style: italic;
+        color: rgba(11,18,32,.55);
+    }
+
+  </style>
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top" aria-label="Retour en haut">
+        <img src="assets/logo.png" alt="Limb Lab logo" />
+        <div>
+          <strong>Limb <span class="accent" style="display:inline">Lab</span></strong>
+          <span>Biomedical Prosthetics</span>
+        </div>
+      </a>
+
+      <div class="links">
+        <a href="#work">Ce quon fait</a>
+        <a href="#members">Membres</a>
+        <a href="#contact">Contact</a>
+        <a class="btn" href="#join">Rejoindre</a>
+      </div>
+    </div>
+  </nav>
+
+  <header id="top">
+    <div class="wrap hero">
+      <div class="card hero-left reveal">
+        <div class="glow" aria-hidden="true"></div>
+
+        <div class="kicker">
+          <span class="pill"><span class="dot"></span> Montréal | Société technique Polytechnique Montréal</span>
+        </div>
+
+        <h1>Des prothèses <span class="accent">simples</span> et <span class="accent">robustes</span>, centrées sur lhumain.</h1>
+        <p class="lead">
+          Limb Lab conçoit, prototype et teste des solutions prosthétiques biomédicales. On combine design, électronique et logiciel,
+          avec une approche pratique et orientée impact.
+        </p>
+
+        <div class="actions">
+          <a class="btn primary" href="#join">Devenir membre</a>
+          <a class="btn" href="#work">Voir ce quon fait</a>
+        </div>
+
+        <div class="stats" aria-label="Statistiques">
+          <div class="stat">
+            <b data-count="3">0</b>
+            <span>piliers: éducation, R&D, compétition</span>
+          </div>
+          <div class="stat">
+            <b data-count="12">0</b>
+            <span>membres actifs (exemple)</span>
+          </div>
+          <div class="stat">
+            <b data-count="2">0</b>
+            <span>compétitions ciblées (exemple)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="card hero-media reveal" style="padding:0">
+          <img src="assets/hero.jpg" alt="Prototype ou équipe Limb Lab" />
+          <div class="badge">
+            <span class="dot" aria-hidden="true"></span>
+            <div>
+              <strong>Prototype V1</strong>
+              <div style="font-size:12px;color:rgba(11,18,32,.60)">itération rapide + validation</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal" style="padding:16px">
+          <div style="display:flex; justify-content:space-between; gap:10px; align-items:center">
+            <div>
+              <b>Partenariat</b>
+              <div style="color:var(--muted);font-size:13px;margin-top:4px">
+                Mettre ici leur photo et dire leur contribution aux différents projets
+              </div>
+              <div class="partner-row">
+                <img class="partner-logo" src="assets/partenaire1.png" alt="Logo Partenaire 1" />
+                <div class="partner-text">
+                  <div class="partner-name">E-Nable Québec</div>
+                  <div class="partner-note">Contribution: impression 3D, mentorat, accès atelier, etc.</div>
+                </div>
+              </div>
+              <div style="height:10px"></div>
+                <div class="partner-row">
+                <img class="partner-logo" src="assets/partenaire2.png" alt="Logo Partenaire 2" />
+                <div class="partner-text">
+                    <div class="partner-name">Partenaire 2</div>
+                    <div class="partner-note">Contribution: mentorat et accès au laboratoire.</div>
+                </div>
+                </div>
+            </div>
+            
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="work">
+      <div class="wrap">
+        <div class="section-title reveal">
+          <div>
+            <h2>Ce quon fait</h2>
+            <p>Trois axes: transmettre, innover, se mesurer sur le terrain.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="feature reveal">
+            <div class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M4 7h16M7 7v12m10-12v12M9 12h6" stroke="rgba(11,18,32,.85)" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h2>Éducation</h2>
+            <p>
+              On partage nos connaissances en génie avec des élèves du secondaire et du cégep, via ateliers,
+              mentorat, démos et projets de volontariat liés à laccessibilité.
+            </p>
+          </div>
+
+          <div class="feature reveal">
+            <div class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2v6m0 14v-6M4 12h6m10 0h-6" stroke="rgba(11,18,32,.85)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M12 8a4 4 0 100 8 4 4 0 000-8z" stroke="rgba(11,18,32,.85)" stroke-width="2"/>
+              </svg>
+            </div>
+            <h2>R&D</h2>
+            <p>
+              On développe des technologies de pointe pour les prothèses: mécanique, capteurs, contrôle, logiciels,
+              et validation par tests fonctionnels.
+            </p>
+          </div>
+
+          <div class="feature reveal">
+            <div class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M7 20l10-16M7 8h10" stroke="rgba(11,18,32,.85)" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h2>Compétition</h2>
+            <p>
+              On vise des événements concrets: <b>CYBATHLON</b> (assistive tech), des défis de design de dispositifs
+              dassistance (ex: <b>Make:able Challenge</b>), et des challenges e-NABLE selon les saisons. :contentReference
+            </p>
+          </div>
+        </div>
+
+        <div style="height:12px"></div>
+
+        <div class="vision reveal" aria-label="Vision">
+          <b>Notre vision</b>
+          <p>
+            Créer des prothèses accessibles, fiables et humaines, en formant la relève, en innovant en R&D,
+            et en validant nos solutions par la compétition et limpact communautaire.
+          </p>
+        </div>
+
+        <div style="height:18px"></div>
+
+        <div class="section-title reveal" style="margin-bottom:10px">
+          <div>
+            <h2>Photos</h2>
+            <p>Atelier, prototypes, événements, compétitions. Remplace les images par les tiennes.</p>
+          </div>
+        </div>
+
+        <div class="slider reveal" aria-label="Galerie">
+          <div class="track" id="track">
+            <div class="slide">
+              <img src="assets/gallery-1.jpg" alt="Prototype en atelier" />
+              <div class="caption">
+                <div><b>Atelier</b><div><span>Prototypage et itérations</span></div></div>
+                <span>01</span>
+              </div>
+            </div>
+            <div class="slide">
+              <img src="assets/gallery-2.jpg" alt="Équipe Limb Lab" />
+              <div class="caption">
+                <div><b>Équipe</b><div><span>Collaboration interdisciplinaire</span></div></div>
+                <span>02</span>
+              </div>
+            </div>
+            <div class="slide">
+              <img src="assets/gallery-3.jpg" alt="Test fonctionnel" />
+              <div class="caption">
+                <div><b>Tests</b><div><span>Mesures et validation</span></div></div>
+                <span>03</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slider-controls reveal">
+          <button class="btn" id="prev" aria-label="Image précédente">Prev</button>
+          <button class="btn" id="next" aria-label="Image suivante">Next</button>
+          <div class="dots" id="dots" aria-label="Indicateurs"></div>
+          <span class="pill">Autoplay</span>
+        </div>
+
+        <div style="height:16px"></div>
+
+        <div class="banner reveal big-join" id="join">
+          <div>
+            <b style="font-size:16px">Tu veux joindre Limb Lab?</b>
+            <p>Remplacer le bouton par le Google Form de recrutement.</p>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn primary" href="#" onclick="alert('Remplace ce lien par ton Google Form'); return false;">Formulaire</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="members">
+      <div class="wrap">
+        <div class="section-title reveal">
+          <div>
+            <h2>Notre équipe</h2>
+            <p>Cette initiative serait impossible sans la contribution et le temps alloué par nos membres</p>
+          </div>
+        </div>
+
+        <h3 class="subhead reveal">Équipe de direction</h3>
+        <div class="members reveal" id="leadGrid" aria-label="Équipe de direction"></div>
+
+        <div style="height:18px"></div>
+
+        <div class="toolbar reveal">
+          <input class="input" id="search" placeholder="Rechercher un membre (nom, rôle, équipe)..." />
+          <div class="chips" id="chips"></div>
+        </div>
+
+        <h3 class="subhead reveal">Membres</h3>
+        <div class="members reveal" id="memberGrid" aria-label="Tous les membres"></div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="section-title reveal">
+          <div>
+            <h2>Contact</h2>
+            <p>Suivez-nous prenez part au changement sur email, Instagram, LinkedIn, GitHub.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="feature reveal">
+            <h3>Email</h3>
+            <p><a href="mailto:hello@limblab.ca">hello@limblab.ca</a></p>
+          </div>
+          <div class="feature reveal">
+            <h3>Social Media</h3>
+            <p><a href="#" onclick="alert('Remplace par liste de liens pour tout nos réseau'); return false;">/company/limblab</a></p>
+          </div>
+          <div class="feature reveal">
+            <h3>On site</h3>
+            <p><a href="#" onclick="alert('Remplace notre adresse, numéro de local'); return false;">github.com/limb-lab</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot">
+      <div style="display:flex; gap:12px; align-items:center">
+        <img src="assets/logo.png" alt="" style="width:34px;height:34px;border-radius:12px;border:1px solid rgba(11,18,32,.10);background:rgba(255,255,255,.9);padding:6px" />
+        <div>
+          <div><b style="color:rgba(11,18,32,.86)">Limb Lab</b></div>
+          <div style="font-size:12px">Biomedical Prosthetics</div>
+        </div>
+      </div>
+      <div style="font-size:12px">© <span id="year"></span> Limb Lab</div>
+    </div>
+  </footer>
+
+  <!-- Member Modal -->
+  <dialog id="modal">
+    <div class="modal">
+      <div class="m-img"><img id="mPhoto" alt="Photo membre" /></div>
+      <div>
+        <div class="m-top">
+          <div>
+            <h3 id="mName" style="margin:0"></h3>
+            <div id="mRole" style="color:rgba(11,18,32,.75);margin-top:4px"></div>
+            <div id="mTeam" style="color:rgba(11,18,32,.55);font-size:13px;margin-top:6px"></div>
+          </div>
+          <button class="x" id="close" aria-label="Fermer">Fermer</button>
+        </div>
+        <div style="height:10px"></div>
+        <p id="mBio"></p>
+        <div style="height:12px"></div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap">
+          <a class="btn" id="mLink" href="#" target="_blank" rel="noreferrer">Lien</a>
+          <span class="pill">Couleurs: <span style="color:var(--blue)">bleu</span> + <span style="color:var(--green)">vert</span></span>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    const $ = (q, el=document) => el.querySelector(q);
+    const $$ = (q, el=document) => Array.from(el.querySelectorAll(q));
+
+    $("#year").textContent = new Date().getFullYear();
+
+    const io = new IntersectionObserver((entries)=>{
+      for(const e of entries){
+        if(e.isIntersecting) e.target.classList.add("on");
+      }
+    }, { threshold: 0.12 });
+    $$(".reveal").forEach(el=>io.observe(el));
+
+    const counters = $$("[data-count]");
+    const animateCounter = (el) => {
+      const target = Number(el.dataset.count || "0");
+      const t0 = performance.now();
+      const dur = 900;
+      const tick = (t) => {
+        const p = Math.min(1, (t - t0) / dur);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(target * eased);
+        if(p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+    const counterIO = new IntersectionObserver((entries)=>{
+      for(const e of entries){
+        if(e.isIntersecting){
+          animateCounter(e.target);
+          counterIO.unobserve(e.target);
+        }
+      }
+    }, { threshold: 0.6 });
+    counters.forEach(el=>counterIO.observe(el));
+
+    // Slider
+    const track = $("#track");
+    const slides = $$(".slide", track);
+    let idx = 0;
+
+    const dots = $("#dots");
+    slides.forEach((_, i)=>{
+      const d = document.createElement("button");
+      d.className = "s-dot" + (i===0 ? " active" : "");
+      d.setAttribute("aria-label", "Aller à l'image " + (i+1));
+      d.addEventListener("click", ()=>go(i, true));
+      dots.appendChild(d);
+    });
+
+    const setDots = () => {
+      $$(".s-dot", dots).forEach((d,i)=>d.classList.toggle("active", i===idx));
+    };
+
+    const go = (i, manual=false) => {
+      idx = (i + slides.length) % slides.length;
+      track.style.transform = "translateX(" + (-idx * 100) + "%)";
+      setDots();
+      if(manual) resetAuto();
+    };
+
+    $("#prev").addEventListener("click", ()=>go(idx-1, true));
+    $("#next").addEventListener("click", ()=>go(idx+1, true));
+
+    let auto = null;
+    const startAuto = () => auto = setInterval(()=>go(idx+1), 4200);
+    const resetAuto = () => { clearInterval(auto); startAuto(); };
+    startAuto();
+
+    // Leadership + members data
+    const leadership = [
+      { name:"Prénom Nom", role:"Président(e)", team:"Direction", bio:"Vision, coordination, partenariats.", photo:"assets/lead-1.jpg", link:"#"},
+      { name:"Prénom Nom", role:"Responsable électronique", team:"Direction", bio:"Capteurs, PCB, alimentation, validation.", photo:"assets/lead-2.jpg", link:"#"},
+      { name:"Prénom Nom", role:"Responsable mécanique", team:"Direction", bio:"CAD, fabrication, tests mécaniques.", photo:"assets/lead-3.jpg", link:"#"},
+      { name:"Prénom Nom", role:"Responsable logiciel", team:"Direction", bio:"Firmware, outils, analyse.", photo:"assets/lead-4.jpg", link:"#"},
+      { name:"Prénom Nom", role:"Responsable facteurs humains", team:"Direction", bio:"Ergonomie, confort, protocoles.", photo:"assets/lead-5.jpg", link:"#"}
+    ];
+
+    const members = [
+      { name:"Aymen Zire", role:"Membre", team:"Prototypage", bio:"Ajoute une bio courte ici.", photo:"assets/member-yacine.jpg", link:"#"},
+      { name:"Prénom Nom", role:"Membre", team:"Électronique", bio:"Ajoute une bio courte ici.", photo:"assets/member-aymen.jpg", link:"#"},
+      { name:"Prénom Nom", role:"Membre", team:"Mécanique", bio:"Ajoute une bio courte ici.", photo:"assets/member-aymen.jpg", link:"#"},
+      { name:"Prénom Nom", role:"Membre", team:"Logiciel", bio:"Ajoute une bio courte ici.", photo:"assets/member-yacine.jpg", link:"#"}
+    ];
+
+    const teams = ["Tous", ...Array.from(new Set(members.map(m=>m.team)))];
+    const chipsEl = $("#chips");
+    let activeTeam = "Tous";
+
+    chipsEl.innerHTML = "";
+    teams.forEach(t=>{
+      const c = document.createElement("button");
+      c.className = "chip" + (t==="Tous" ? " active" : "");
+      c.textContent = t;
+      c.addEventListener("click", ()=>{
+        activeTeam = t;
+        $$(".chip", chipsEl).forEach(x=>x.classList.toggle("active", x.textContent===t));
+        renderAll();
+      });
+      chipsEl.appendChild(c);
+    });
+
+    const modal = $("#modal");
+    $("#close").addEventListener("click", ()=>modal.close());
+    modal.addEventListener("click", (e)=>{
+      const rect = modal.getBoundingClientRect();
+      const inDialog = (
+        e.clientX >= rect.left && e.clientX <= rect.right &&
+        e.clientY >= rect.top && e.clientY <= rect.bottom
+      );
+      if(!inDialog) modal.close();
+    });
+
+    const openMember = (m) => {
+      $("#mPhoto").src = m.photo;
+      $("#mPhoto").alt = "Photo de " + m.name;
+      $("#mName").textContent = m.name;
+      $("#mRole").textContent = m.role;
+      $("#mTeam").textContent = "Équipe: " + (m.team || "Membre");
+      $("#mBio").textContent = m.bio;
+
+      const link = $("#mLink");
+      link.href = m.link || "#";
+      link.textContent = (m.link && m.link !== "#") ? "Profil" : "Ajouter un lien";
+
+      modal.showModal();
+    };
+
+    const renderCards = (containerSelector, list) => {
+      const grid = $(containerSelector);
+      grid.innerHTML = "";
+      list.forEach(m=>{
+        const el = document.createElement("div");
+        el.className = "member";
+        el.innerHTML = `
+          <div class="avatar"><img src="${m.photo}" alt="Portrait ${m.name}" /></div>
+          <b>${m.name}</b>
+          <small>${m.role}</small>
+        `;
+        el.addEventListener("click", ()=>openMember(m));
+        grid.appendChild(el);
+      });
+    };
+
+    const search = $("#search");
+    search.addEventListener("input", ()=>renderAll());
+
+    const renderAll = () => {
+      renderCards("#leadGrid", leadership);
+
+      const q = (search.value || "").trim().toLowerCase();
+      const filtered = members.filter(m=>{
+        const hitTeam = activeTeam==="Tous" || m.team===activeTeam;
+        const hay = (m.name+" "+m.role+" "+m.team+" "+m.bio).toLowerCase();
+        return hitTeam && (q==="" || hay.includes(q));
+      });
+
+      const memberGrid = $("#memberGrid");
+      memberGrid.innerHTML = "";
+
+      filtered.forEach(m=>{
+        const el = document.createElement("div");
+        el.className = "member";
+        el.innerHTML = `
+          <div class="avatar"><img src="${m.photo}" alt="Portrait ${m.name}" /></div>
+          <b>${m.name}</b>
+          <small>${m.team || "Membre"}</small>
+        `;
+        el.addEventListener("click", ()=>openMember(m));
+        memberGrid.appendChild(el);
+      });
+
+      if(filtered.length===0){
+        const empty = document.createElement("div");
+        empty.className = "feature";
+        empty.style.gridColumn = "1 / -1";
+        empty.innerHTML = "<h3>Aucun résultat</h3><p>Essaie un autre mot-clé ou remets le filtre sur Tous.</p>";
+        memberGrid.appendChild(empty);
+      }
+    };
+
+    renderAll();
+  </script>
+</body>
+</html>
