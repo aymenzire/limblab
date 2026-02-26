@@ -3,10 +3,190 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Limb Lab | Biomedical Prosthetics</title>
+  <title>E-Nable Québec | Biomedical Prosthetics</title>
   <meta name="description" content="Limb Lab conçoit des solutions prosthétiques biomédicales: éducation, R&D, compétitions et partenariat e-NABLE." />
 
   <style>
+      /* ========= DONATION SECTION (colle ca dans ton <style>) ========= */
+#donation{ padding: 34px 0; }
+
+.don-card{
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  border: 1px solid rgba(11,18,32,.10);
+  background:
+    linear-gradient(135deg, rgba(0,61,165,.10), rgba(200,16,46,.08)),
+    radial-gradient(900px 420px at 20% 0%, rgba(0,61,165,.18), transparent 55%),
+    radial-gradient(700px 380px at 95% 25%, rgba(200,16,46,.14), transparent 55%),
+    rgba(255,255,255,.85);
+  box-shadow: 0 26px 80px rgba(11,18,32,.12);
+}
+
+.don-glow{
+  position:absolute; inset:-35%;
+  background:
+    radial-gradient(circle at 28% 30%, rgba(0,61,165,.22), transparent 52%),
+    radial-gradient(circle at 72% 55%, rgba(200,16,46,.16), transparent 55%);
+  filter: blur(28px);
+  opacity: .9;
+  pointer-events: none;
+}
+
+.don-media{
+  position:absolute;
+  inset:0;
+  opacity:.18;
+  pointer-events:none;
+}
+
+.don-media img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  filter: saturate(1.05) contrast(1.05);
+  transform: scale(1.04);
+}
+
+/* petite texture "papier" */
+.don-card::after{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,.10) 0px,
+      rgba(255,255,255,.10) 2px,
+      rgba(255,255,255,0) 2px,
+      rgba(255,255,255,0) 10px
+    );
+  mix-blend-mode: overlay;
+  opacity:.55;
+  pointer-events:none;
+}
+
+.don-content{
+  position:relative;
+  padding: 26px;
+  display:grid;
+  gap: 12px;
+  max-width: 760px;
+}
+
+@media (max-width: 680px){
+  .don-content{ padding: 22px; }
+}
+
+.don-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  width: fit-content;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(11,18,32,.10);
+  background: rgba(255,255,255,.78);
+  color: rgba(11,18,32,.70);
+  box-shadow: 0 10px 22px rgba(11,18,32,.06);
+  font-size: 12px;
+}
+
+.don-dot{
+  width:10px; height:10px;
+  border-radius: 99px;
+  background: #C8102E;
+  box-shadow: 0 0 0 5px rgba(200,16,46,.10);
+}
+
+.don-title{
+  margin:0;
+  font-size: clamp(22px, 2.6vw, 30px);
+  letter-spacing: -0.3px;
+}
+
+.don-text{
+  margin:0;
+  color: rgba(11,18,32,.66);
+  line-height: 1.7;
+  max-width: 70ch;
+}
+
+.don-actions{
+  display:flex;
+  gap:14px;
+  align-items:center;
+  flex-wrap:wrap;
+  margin-top: 6px;
+}
+
+.don-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  padding: 12px 18px;
+  border-radius: 16px;
+  color: white;
+  font-weight: 750;
+  border: 1px solid rgba(0,61,165,.35);
+  background:
+    linear-gradient(135deg, rgba(0,61,165,.96), rgba(11,49,106,.92));
+  box-shadow:
+    0 18px 40px rgba(0,61,165,.22),
+    inset 0 1px 0 rgba(255,255,255,.25);
+  transform: translateZ(0);
+  transition: transform .18s ease, filter .18s ease, box-shadow .18s ease;
+}
+
+.don-btn:hover{
+  transform: translateY(-2px) scale(1.01);
+  filter: brightness(1.02);
+  box-shadow:
+    0 22px 52px rgba(0,61,165,.26),
+    inset 0 1px 0 rgba(255,255,255,.30);
+}
+
+.don-btn:active{
+  transform: translateY(0px) scale(.99);
+}
+
+.don-arrow{ opacity: .95; }
+
+.don-link{
+  color: rgba(11,18,32,.70);
+  text-decoration: underline;
+  text-decoration-color: rgba(11,18,32,.25);
+  text-underline-offset: 4px;
+}
+
+.don-link:hover{
+  color: rgba(11,18,32,.90);
+  text-decoration-color: rgba(11,18,32,.45);
+}
+
+.don-trust{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top: 6px;
+}
+
+.don-chip{
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(11,18,32,.10);
+  background: rgba(255,255,255,.76);
+  color: rgba(11,18,32,.62);
+  font-size: 12px;
+  box-shadow: 0 10px 20px rgba(11,18,32,.05);
+}
+
+
+
+
+
+
+
+
     :root{
       --blue:#315D97;
       --blue-900:#0B316A;
@@ -52,15 +232,14 @@
     }
     .brand{
       display:flex; align-items:center; gap:12px;
-      min-width: 190px;
+      min-width: 200px;
     }
     .brand img{
-      width:40px; height:40px; border-radius:12px;
-      background:rgba(255,255,255,.9);
-      padding:6px;
-      border:1px solid var(--stroke);
-      box-shadow: 0 10px 24px rgba(11,18,32,.08);
+      width:40px;
+      height:40px;
+      object-fit:contain;
     }
+   
     .brand strong{ font-weight:800; letter-spacing:.2px; }
     .brand span{ color:var(--muted); font-size:12px; display:block; margin-top:1px; }
 
@@ -102,7 +281,7 @@
       padding:8px 10px; border-radius:999px;
       box-shadow: 0 10px 20px rgba(11,18,32,.05);
     }
-    .dot{ width:9px; height:9px; border-radius:99px; background: var(--green); box-shadow: 0 0 0 4px rgba(109,160,81,.16); }
+    .dot{ width:9px; height:9px; border-radius:99px; background: var(--blue); box-shadow: 0 0 0 4px rgba(109,160,81,.16); }
 
     /* Hero */
     header{
@@ -145,10 +324,11 @@
       line-height:1.08;
     }
     .accent{
-      background: linear-gradient(90deg, var(--blue), var(--green));
+      background: linear-gradient(90deg, #003DA5, #4a7cff);
       -webkit-background-clip:text;
       background-clip:text;
       color:transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,.6);
     }
     .lead{
       margin:14px 0 18px;
@@ -157,29 +337,45 @@
       line-height: 1.6;
       max-width: 60ch;
     }
-    .actions{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+    .actions{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:center }
 
     .stats{
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap:10px;
-      margin-top:18px;
+      margin-top:20px;
     }
     @media (max-width: 520px){ .stats{ grid-template-columns:1fr; } }
     .stat{
+      text-align: center;
       padding:14px;
       border-radius: 16px;
       border:1px solid rgba(11,18,32,.10);
       background: rgba(255,255,255,.70);
+
     }
-    .stat b{ font-size:18px; display:block; }
+    .stat b{ font-size:28px; display:block;  }
     .stat span{ color:var(--muted); font-size:12px; }
+
+    .stat2{
+      text-align:center;
+      padding:14px;
+      border-radius:16px;
+      border:1px solid rgba(11,18,32,.10);
+      background:rgba(255,255,255,.70);
+
+      grid-column: 1 / -1;   /* prend toute la rangee de la grille */
+      justify-self: center;  /* centre la card dans la grille */
+      width: 260px;          /* ajuste si tu veux plus large */
+    }
+    .stat2 b{ font-size:28px; display:block; }
+    .stat2 span{ color:var(--muted); font-size:12px; }
 
     .glow{
       position:absolute; inset:-40%;
       background:
         radial-gradient(circle at 30% 30%, rgba(49,93,151,.22), transparent 50%),
-        radial-gradient(circle at 70% 55%, rgba(109,160,81,.18), transparent 55%);
+        radial-gradient(circle at 70% 55%, rgba(200,16,46,0.06), transparent 55%);
       filter: blur(26px);
       animation: float 10s ease-in-out infinite;
       pointer-events:none;
@@ -515,10 +711,7 @@
         width:56px;
         height:56px;
         object-fit: contain;
-        border-radius: 12px;
-        border: 1px solid rgba(11,18,32,.10);
-        background: rgba(255,255,255,.90);
-        padding:8px;
+        
     }
 
     .partner-text{ line-height:1.2; }
@@ -543,15 +736,15 @@
   <nav class="nav">
     <div class="wrap nav-inner">
       <a class="brand" href="#top" aria-label="Retour en haut">
-        <img src="assets/logo.png" alt="Limb Lab logo" />
+        <img src="assets/logo.png" alt="e-NABLE québec logo" />
         <div>
-          <strong>Limb <span class="accent" style="display:inline">Lab</span></strong>
+          <strong>e-NABLE <span style="display:inline">Québec</span></strong>
           <span>Biomedical Prosthetics</span>
         </div>
       </a>
 
       <div class="links">
-        <a href="#work">Ce quon fait</a>
+        <a href="#work">Ce qu'on fait</a>
         <a href="#members">Membres</a>
         <a href="#contact">Contact</a>
         <a class="btn" href="#join">Rejoindre</a>
@@ -565,44 +758,48 @@
         <div class="glow" aria-hidden="true"></div>
 
         <div class="kicker">
-          <span class="pill"><span class="dot"></span> Montréal | Société technique Polytechnique Montréal</span>
+          <span class="pill"><span class="dot"></span> Organisme à but non lucratif</span>
         </div>
 
-        <h1>Des prothèses <span class="accent">simples</span> et <span class="accent">robustes</span>, centrées sur lhumain.</h1>
+        <h1 style="font-size:50px; text-align: center;">
+          <span class="accent" >e-NABLE Québec</span>
+        </h1>
+        <h2>Des prothèses <span class="accent">simples</span> et <span class="accent">robustes</span>, centrées sur lhumain.</h2>
         <p class="lead">
-          Limb Lab conçoit, prototype et teste des solutions prosthétiques biomédicales. On combine design, électronique et logiciel,
-          avec une approche pratique et orientée impact.
+          e-NABLE Québec est une communauté engagée de bénévoles, d’ingénieurs, de cliniciens et de makers, inspirée du réseau international e-NABLE, 
+          qui conçoit et fabrique des prothèses imprimées en 3D accessibles pour les personnes qui en ont besoin, au Québec comme ailleurs dans le monde. 
+          En combinant expertise technique, collaboration et engagement humain, l’initiative transforme l’innovation ouverte en solutions concrètes, 
+          offrant des dispositifs personnalisés qui améliorent l’autonomie, favorisent l’inclusion et changent durablement le quotidien des utilisateurs.
         </p>
 
         <div class="actions">
           <a class="btn primary" href="#join">Devenir membre</a>
-          <a class="btn" href="#work">Voir ce quon fait</a>
+          <a class="btn" href="#work">Ce qu'on fait</a>
         </div>
 
         <div class="stats" aria-label="Statistiques">
           <div class="stat">
-            <b data-count="3">0</b>
-            <span>piliers: éducation, R&D, compétition</span>
-          </div>
-          <div class="stat">
-            <b data-count="12">0</b>
-            <span>membres actifs (exemple)</span>
-          </div>
-          <div class="stat">
             <b data-count="2">0</b>
-            <span>compétitions ciblées (exemple)</span>
+            <span>Nombre de dons offert</span>
+          </div>
+          <div class="stat">
+            <b data-count="7">0</b>
+            <span>Nombre de membres actifs</span>
+          </div>
+          <div class="stat2">
+            <b data-count="1000000">0</b>
+            <span>Nombre de follower</span>
           </div>
         </div>
       </div>
 
       <div class="hero-right">
         <div class="card hero-media reveal" style="padding:0">
-          <img src="assets/hero.jpg" alt="Prototype ou équipe Limb Lab" />
+          <img src="assets/carte.jpg" alt="Prototype ou équipe Limb Lab" />
           <div class="badge">
             <span class="dot" aria-hidden="true"></span>
             <div>
-              <strong>Prototype V1</strong>
-              <div style="font-size:12px;color:rgba(11,18,32,.60)">itération rapide + validation</div>
+              <strong>Carte des chapitres e-NABLE</strong>
             </div>
           </div>
         </div>
@@ -612,23 +809,29 @@
             <div>
               <b>Partenariat</b>
               <div style="color:var(--muted);font-size:13px;margin-top:4px">
-                Mettre ici leur photo et dire leur contribution aux différents projets
+                <p>
+                  Derrière chaque avancée se trouvent des partenaires engagés qui partage notre vision et qui rendent ces solutions possibles.
+                </p>
               </div>
+
               <div class="partner-row">
-                <img class="partner-logo" src="assets/partenaire1.png" alt="Logo Partenaire 1" />
+
+                <img class="partner-logo" src="assets/partenaire1.jpg" alt="Logo Partenaire 1" />
+
                 <div class="partner-text">
-                  <div class="partner-name">E-Nable Québec</div>
-                  <div class="partner-note">Contribution: impression 3D, mentorat, accès atelier, etc.</div>
+                  <div class="partner-name">Yan-tastik impression 3D</div>
+                  <div class="partner-note">Yan-tastik est une entreprise québécoise qui soutient e-NABLE Québec par le partage de son expertise, l’accès à un parc d’imprimantes permettant de répondre à la demande croissante, ainsi qu’un accompagnement technique précieux qui contribue à améliorer la qualité et la rapidité de fabrication des prothèses.</div>
                 </div>
               </div>
-              <div style="height:10px"></div>
+              <!--<div style="height:10px"></div>
                 <div class="partner-row">
                 <img class="partner-logo" src="assets/partenaire2.png" alt="Logo Partenaire 2" />
                 <div class="partner-text">
-                    <div class="partner-name">Partenaire 2</div>
+                    <div class="partner-name">A</div>
                     <div class="partner-note">Contribution: mentorat et accès au laboratoire.</div>
                 </div>
                 </div>
+                -->
             </div>
             
 
@@ -643,12 +846,24 @@
       <div class="wrap">
         <div class="section-title reveal">
           <div>
-            <h2>Ce quon fait</h2>
-            <p>Trois axes: transmettre, innover, se mesurer sur le terrain.</p>
+            <h2>Notre travail : Ce qu'on fait</h2>
+            <p>Notre travail ce résume en trois axes principaux: transmettre, innover, se mesurer sur le terrain au Québec et à travers le monde.</p>
           </div>
         </div>
 
         <div class="grid-3">
+          <div class="feature reveal">
+            <div class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M7 20l10-16M7 8h10" stroke="rgba(11,18,32,.85)" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h2>Donations de prothèses</h2>
+            <p>
+            Nos dons prennent la forme de prothèses de main imprimées en 3D, conçues sur mesure puis offertes gratuitement aux enfants et adultes qui en ont besoin. Chaque dispositif est fabriqué par des bénévoles à partir de designs open-source et adapté aux mesures de l’utilisateur afin d’améliorer sa fonctionnalité et son autonomie. En collaborant avec les familles, les cliniciens et la communauté maker, nous transformons la technologie en solutions concrètes qui redonnent l’accès aux gestes du quotidien.
+            </p>
+          </div>
+
           <div class="feature reveal">
             <div class="icon" aria-hidden="true">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
@@ -657,8 +872,8 @@
             </div>
             <h2>Éducation</h2>
             <p>
-              On partage nos connaissances en génie avec des élèves du secondaire et du cégep, via ateliers,
-              mentorat, démos et projets de volontariat liés à laccessibilité.
+              Pour former la relève de e-nable, on partage nos connaissances en génie (CFAO, Impression 3D) et autres avec des élèves du secondaire, cégep et université, via ateliers,
+              mentorat, démos et projets de volontariat liés à l'accessibilité. Nos experts en impressions 3D accompagnes les bénévoles peu importe le niveau à améliorer leurs compétences.
             </p>
           </div>
 
@@ -671,41 +886,23 @@
             </div>
             <h2>R&D</h2>
             <p>
-              On développe des technologies de pointe pour les prothèses: mécanique, capteurs, contrôle, logiciels,
-              et validation par tests fonctionnels.
+              On développe des technologies pour les prothèses: mécanique, capteurs, contrôle, logiciels et validation par tests fonctionnels. Nos travaux incluent le contrôle myoélectrique, basé sur l’acquisition et le traitement des signaux musculaires (EMG) afin de piloter la prothèse et améliorer la précision, l’ergonomie et l’autonomie des utilisateurs, et ce, dans le but de l'intégrer dans les donations futures gratuitement ou à très faible coût.
             </p>
           </div>
 
-          <div class="feature reveal">
-            <div class="icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="M7 20l10-16M7 8h10" stroke="rgba(11,18,32,.85)" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <h2>Compétition</h2>
-            <p>
-              On vise des événements concrets: <b>CYBATHLON</b> (assistive tech), des défis de design de dispositifs
-              dassistance (ex: <b>Make:able Challenge</b>), et des challenges e-NABLE selon les saisons. :contentReference
-            </p>
-          </div>
+          
         </div>
 
         <div style="height:12px"></div>
 
-        <div class="vision reveal" aria-label="Vision">
-          <b>Notre vision</b>
-          <p>
-            Créer des prothèses accessibles, fiables et humaines, en formant la relève, en innovant en R&D,
-            et en validant nos solutions par la compétition et limpact communautaire.
-          </p>
-        </div>
+     
 
         <div style="height:18px"></div>
 
         <div class="section-title reveal" style="margin-bottom:10px">
           <div>
-            <h2>Photos</h2>
-            <p>Atelier, prototypes, événements, compétitions. Remplace les images par les tiennes.</p>
+            <h2>Galerie photo</h2>
+            <p>Nos prototypes 🙌 </p>
           </div>
         </div>
 
@@ -732,6 +929,20 @@
                 <span>03</span>
               </div>
             </div>
+            <div class="slide">
+              <img src="assets/gallery-4.jpg" alt="Test fonctionnel" />
+              <div class="caption">
+                <div><b>Tests</b><div><span>Mesures et validation</span></div></div>
+                <span>03</span>
+              </div>
+            </div>
+            <div class="slide">
+              <img src="assets/gallery-5.jpg" alt="Test fonctionnel" />
+              <div class="caption">
+                <div><b>Tests</b><div><span>Mesures et validation</span></div></div>
+                <span>03</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -746,15 +957,32 @@
 
         <div class="banner reveal big-join" id="join">
           <div>
-            <b style="font-size:16px">Tu veux joindre Limb Lab?</b>
-            <p>Remplacer le bouton par le Google Form de recrutement.</p>
+            <b style="font-size:16px">Tu veux joindre e-NABLE?</b>
+            <p>Remplis ce Google Form et nous te répondrons dans les plus brefs délais.</p>
           </div>
           <div style="display:flex; gap:10px; flex-wrap:wrap">
-            <a class="btn primary" href="#" onclick="alert('Remplace ce lien par ton Google Form'); return false;">Formulaire</a>
+            <a class="btn primary" href="https://docs.google.com/forms/d/e/1FAIpQLSexEJH8fGnrgljyOsXq9EgrNGrG5YI7qKS0Sa-sKWFJ0yG4bA/viewform?usp=publish-editor" ; target="_blank"">Formulaire candidature</a>
           </div>
         </div>
+        
+        <div style="height:16px"></div>
+
+        <div class="banner reveal big-join" id="join">
+          <div>
+            <b style="font-size:16px">Besoin d'une prothèse e-NABLE?</b>
+            <p>Remplis ce Google Form et nous te répondrons dans les plus brefs délais.</p>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn primary" href="https://docs.google.com/forms/d/e/1FAIpQLSexEJH8fGnrgljyOsXq9EgrNGrG5YI7qKS0Sa-sKWFJ0yG4bA/viewform?usp=publish-editor" ; target="_blank"">Formulaire de demande</a>
+          </div>
+        </div>
+
       </div>
     </section>
+
+
+
+
 
     <section id="members">
       <div class="wrap">
@@ -764,59 +992,145 @@
             <p>Cette initiative serait impossible sans la contribution et le temps alloué par nos membres</p>
           </div>
         </div>
-
-        <h3 class="subhead reveal">Équipe de direction</h3>
-        <div class="members reveal" id="leadGrid" aria-label="Équipe de direction"></div>
-
-        <div style="height:18px"></div>
-
+    
         <div class="toolbar reveal">
           <input class="input" id="search" placeholder="Rechercher un membre (nom, rôle, équipe)..." />
           <div class="chips" id="chips"></div>
         </div>
-
-        <h3 class="subhead reveal">Membres</h3>
+    
+        <h3 class="subhead reveal"> Nos membres bénévoles</h3>
         <div class="members reveal" id="memberGrid" aria-label="Tous les membres"></div>
       </div>
     </section>
 
-    <section id="contact">
+    <!-- SECTION DONATION-->
+    <section id="donation">
       <div class="wrap">
-        <div class="section-title reveal">
-          <div>
-            <h2>Contact</h2>
-            <p>Suivez-nous prenez part au changement sur email, Instagram, LinkedIn, GitHub.</p>
+
+        <div class="don-card reveal">
+          <div class="don-glow" aria-hidden="true"></div>
+
+          <!-- Image decor ( a remplace le fichier par une photo ) -->
+          <div class="don-media" aria-hidden="true">
+            <img src="assets/donation-hero.jpg" alt="">
+          </div>
+
+          <div class="don-content">
+            
+
+            <h2 class="don-title">
+              Faire un don 
+            </h2>
+
+            <p class="don-text">
+              Chaque contribution aide a imprimer, assembler et adapter des protheses de main en 3D pour des personnes qui en ont besoin.
+              Tu finances directement les materiaux, les ajustements, et la rapidite de livraison. Un certificat officiel est offert aux donnateurs.
+            </p>
+
+            <div class="don-actions">
+              <a class="don-btn" id="donBtn" href="LIEN_DONATION" target="_blank" rel="noreferrer">
+                <span>Je donne maintenant FOR SHUUUR 🥖🇫🇷</span>
+                <svg class="don-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+
+              <a class="don-link" href="#contact">
+                Questions? Ecris-nous
+              </a>
+            </div>
+
+            <div class="don-trust">
+              <div class="don-chip">Transparence</div>
+              <div class="don-chip">Impact direct</div>
+              <div class="don-chip">Local + humain</div>
+            </div>
           </div>
         </div>
 
-        <div class="grid-3">
-          <div class="feature reveal">
-            <h3>Email</h3>
-            <p><a href="mailto:hello@limblab.ca">hello@limblab.ca</a></p>
+      </div>
+    </section>
+    <audio id="donAudio" preload="auto">
+      <source src="assets/for-sure-macron.mp3" type="audio/mpeg">
+    </audio>
+
+
+    <section id="contact">
+      <div class="wrap" style="display:flex; justify-content:center;">
+        <div class="card reveal" style="padding:26px; max-width:520px; width:100%; text-align:center;">
+    
+          <h2>Contact</h2>
+          <p style="color:var(--muted)">
+            Une question, une collaboration ou une demande de prothèse? Contacte-nous.
+          </p>
+    
+          <div style="height:18px"></div>
+    
+          <!-- Email -->
+          <b>Courriel</b>
+          <div style="height:8px"></div>
+    
+          <a class="btn primary" href="mailto:e.nable.quebec@gmail.com">
+            e.nable.quebec@gmail.com
+          </a>
+    
+          <div style="height:16px"></div>
+    
+          <!-- Téléphone -->
+          <b>Téléphone</b>
+          <div style="height:8px"></div>
+    
+          <a class="btn" href="tel:+15142941064">
+            514-294-1064
+          </a>
+    
+          <div style="height:20px"></div>
+    
+          <!-- Social -->
+          <b>Réseaux sociaux</b>
+          <div style="height:12px"></div>
+    
+          <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap">
+    
+            <a href="https://www.instagram.com/e_nable.quebec/" target="_blank">
+              <img src="assets/Instagram.jpg" alt="Instagram"
+                   style="width:50px;height:50px;object-fit:contain;border-radius:14px;">
+            </a>
+    
+            <a href="https://www.facebook.com/profile.php?id=61586707352821" target="_blank">
+              <img src="assets/Facebook.png" alt="Facebook"
+                   style="width:50px;height:50px;object-fit:contain;border-radius:14px;">
+            </a>
+    
+            <a href="http://linkedin.com/company/e-nable-québec" target="_blank">
+              <img src="assets/Linkedin.jpg" alt="LinkedIn"
+                   style="width:50px;height:50px;object-fit:contain;border-radius:14px;">
+            </a>
+    
+            <a href="lien youtube" target="_blank">
+              <img src="assets/Youtube.jpg" alt="YouTube"
+                   style="width:50px;height:50px;object-fit:contain;border-radius:14px;">
+            </a>
+    
           </div>
-          <div class="feature reveal">
-            <h3>Social Media</h3>
-            <p><a href="#" onclick="alert('Remplace par liste de liens pour tout nos réseau'); return false;">/company/limblab</a></p>
-          </div>
-          <div class="feature reveal">
-            <h3>On site</h3>
-            <p><a href="#" onclick="alert('Remplace notre adresse, numéro de local'); return false;">github.com/limb-lab</a></p>
-          </div>
+    
         </div>
       </div>
     </section>
+
   </main>
 
   <footer>
     <div class="wrap foot">
       <div style="display:flex; gap:12px; align-items:center">
-        <img src="assets/logo.png" alt="" style="width:34px;height:34px;border-radius:12px;border:1px solid rgba(11,18,32,.10);background:rgba(255,255,255,.9);padding:6px" />
+        <img src="assets/logo.png" alt="logo" style="width:44px;height:44px;padding:6px" />
         <div>
-          <div><b style="color:rgba(11,18,32,.86)">Limb Lab</b></div>
+          <div><b style="color:rgba(11,18,32,.86)">e-NABLE Québec</b></div>
           <div style="font-size:12px">Biomedical Prosthetics</div>
         </div>
       </div>
-      <div style="font-size:12px">© <span id="year"></span> Limb Lab</div>
+      <div style="font-size:12px">© <span id="year"></span> e-NABLE Québec</div>
     </div>
   </footer>
 
@@ -913,7 +1227,7 @@
     const resetAuto = () => { clearInterval(auto); startAuto(); };
     startAuto();
 
-    // Leadership + members data
+    // members data
     const leadership = [
       { name:"Prénom Nom", role:"Président(e)", team:"Direction", bio:"Vision, coordination, partenariats.", photo:"assets/lead-1.jpg", link:"#"},
       { name:"Prénom Nom", role:"Responsable électronique", team:"Direction", bio:"Capteurs, PCB, alimentation, validation.", photo:"assets/lead-2.jpg", link:"#"},
@@ -923,10 +1237,12 @@
     ];
 
     const members = [
-      { name:"Aymen Zire", role:"Membre", team:"Prototypage", bio:"Ajoute une bio courte ici.", photo:"assets/member-yacine.jpg", link:"#"},
-      { name:"Prénom Nom", role:"Membre", team:"Électronique", bio:"Ajoute une bio courte ici.", photo:"assets/member-aymen.jpg", link:"#"},
-      { name:"Prénom Nom", role:"Membre", team:"Mécanique", bio:"Ajoute une bio courte ici.", photo:"assets/member-aymen.jpg", link:"#"},
-      { name:"Prénom Nom", role:"Membre", team:"Logiciel", bio:"Ajoute une bio courte ici.", photo:"assets/member-yacine.jpg", link:"#"}
+      { name:"Camille Wallas", role:"Membre", team:"Prototypage", bio:"Ajoute une bio courte ici.", photo:"assets/member-yacine.jpg", link:"#"},
+      { name:"Camille Wallas 2", role:"Membre", team:"Électronique", bio:"Ajoute une bio courte ici.", photo:"assets/member-aymen.jpg", link:"#"},
+      { name:"Camille Wallas 3", role:"Membre", team:"Mécanique", bio:"Ajoute une bio courte ici.", photo:"assets/member-aymen.jpg", link:"#"},
+      { name:"Camille Wallas 4", role:"Membre", team:"Logiciel", bio:"Ajoute une bio courte ici.", photo:"assets/member-yacine.jpg", link:"#"},
+      { name:"Camille Wallas 5", role:"Membre", team:"Logiciel", bio:"Ajoute une bio courte ici.", photo:"assets/member-yacine.jpg", link:"#"},
+      { name:"Camille Wallas 6", role:"Membre", team:"Logiciel", bio:"Ajoute une bio courte ici.", photo:"assets/member-yacine.jpg", link:"#"}
     ];
 
     const teams = ["Tous", ...Array.from(new Set(members.map(m=>m.team)))];
@@ -992,7 +1308,7 @@
     search.addEventListener("input", ()=>renderAll());
 
     const renderAll = () => {
-      renderCards("#leadGrid", leadership);
+      
 
       const q = (search.value || "").trim().toLowerCase();
       const filtered = members.filter(m=>{
@@ -1026,6 +1342,28 @@
     };
 
     renderAll();
+
+
+
+
+
+
+
+
+    // Donation sound (play first, then open link)
+    const donBtn = document.getElementById("donBtn");
+    const donAudio = document.getElementById("donAudio");
+
+    if (donBtn && donAudio) {
+      donBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        donAudio.currentTime = 0;
+        donAudio.play().catch(()=>{}).finally(() => {
+          window.open(donBtn.href, "_blank", "noopener,noreferrer");
+        });
+      });
+    }
   </script>
 </body>
 </html>
